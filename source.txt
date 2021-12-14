@@ -1,0 +1,13 @@
+//@version=4
+study("Pi Cycle Indicator, 21 Week and Day EMA", overlay=true)
+
+dma111 = sma(close, 111)
+dma350x2 = sma(close * 2, 350)
+output111 = security(syminfo.tickerid, 'D', dma111)
+output350x2 = security(syminfo.tickerid, 'D', dma350x2)
+plot(output111, title= '111 DMA', color=color.orange, linewidth=2)
+plot(output350x2, title= '350x2 DMA', color=color.green, linewidth=2)
+plot(cross(dma111, dma350x2) ? dma111 : na, style = plot.style_cross, linewidth = 4)
+
+plot(ema(close, 147), color=color.red, linewidth=1, title='21 Week EMA')
+plot(ema(close, 21), color=color.red, linewidth=1, title='21 Day EMA')
